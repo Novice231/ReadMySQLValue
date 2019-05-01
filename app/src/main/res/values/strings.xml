@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">读取MySQL数据库记录</string>
+    <string name="tv1">请输入用户名：</string>
+    <string name="tv2">查询结果：</string>
+
+    <string name="et1">请输入用户名!</string>
+
+    <string name="btn1">提交</string>
+
+</resources>
