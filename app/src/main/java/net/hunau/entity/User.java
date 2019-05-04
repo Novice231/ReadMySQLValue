@@ -2,17 +2,17 @@ package net.hunau.entity;
 
 
 public class User {
-    private int id;
+    private String id;
     private String name;
     private String pwd;
     private String sexy;
-    private boolean isused;
+    private String isused;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -40,11 +40,11 @@ public class User {
         this.sexy = sexy;
     }
 
-    public boolean isIsused() {
+    public String isIsused() {
         return isused;
     }
 
-    public void setIsused(boolean isused) {
+    public void setIsused(String isused) {
         this.isused = isused;
     }
 
@@ -59,17 +59,17 @@ public class User {
                 '}';
     }*/
     @Override
-    public String toString(){
+    public String toString() {
         String result = "";
         result += "编号：" + this.id + "，";
         result += "用户名：" + this.name + "，";
         result += "密码：" + this.pwd + "， ";
         result += "性别：" + this.sexy + "，";
-        if(this.isused==true){
+        if (this.isused.equals("1")) {
             result += "是否有效：是";
-        }else{
+        } else {
             result += "是否有效：否";
         }
-        return result;
+        return result+"\n";
     }
 }

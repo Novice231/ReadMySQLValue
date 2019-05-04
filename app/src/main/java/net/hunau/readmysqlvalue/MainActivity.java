@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 import net.hunau.dblink.DBAdapter;
+import net.hunau.entity.User;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
                          @Override
                          public void run() {
                              TextView tv_result = findViewById(R.id.display);
-                             HashMap<String, String> mp =dl.getUserInfoByName(name);
+                             //HashMap<String, String> mp =dl.getUserInfoByName(name);
+                             User[] mp = dl.getUserInfoByName(name);
                              Message msg = new Message();
                              if(mp == null) {
                                  msg.what = 0;
@@ -58,10 +60,15 @@ public class MainActivity extends AppCompatActivity {
                                  //非UI线程不要试着去操作界面
                              }
                              else {
-                                 String ss = new String();
-                                 for (String key : mp.keySet()) {
-                                     ss = ss + key + ":" + mp.get(key) + ";";
+                                 String ss = "";//mp.toString();
+                                 for(int i = 0; i < mp.length; i++) {
+                                     if(mp[i] != null)
+                                        ss += mp[i].toString();
                                  }
+                                 //String ss = new String();
+                                 /*for (String key : mp.keySet()) {
+                                     ss = ss + key + ":" + mp.get(key) + ";";
+                                 }*/
                                  msg.what = 1;
                                  msg.obj = ss;
                              }
