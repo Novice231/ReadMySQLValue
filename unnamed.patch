@@ -1,0 +1,42 @@
+Index: app/src/main/java/net/hunau/dblink/DBAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/net/hunau/dblink/DBAdapter.java	(revision dec82546cc78fcbf6e3106c3098daf3b2a53e942)
++++ app/src/main/java/net/hunau/dblink/DBAdapter.java	(date 1557064440964)
+@@ -46,7 +46,8 @@
+                 return null;
+             } else {
+                 List<User> users = new ArrayList<>();
+-                while (res.next()){
++                if(res.next()==false)return null;
++                do{
+                     User user = new User();
+                     user.setSexy(res.getString("sexy"));
+                     user.setName(res.getString("name"));
+@@ -54,7 +55,7 @@
+                     user.setPwd(res.getString("pwd"));
+                     user.setIsused(res.getString("isused"));
+                     users.add(user);
+-                }
++                }while (res.next());
+                 res.close();
+                 st.close();
+                 conn.close();
+Index: app/src/main/java/net/hunau/readmysqlvalue/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/net/hunau/readmysqlvalue/MainActivity.java	(revision dec82546cc78fcbf6e3106c3098daf3b2a53e942)
++++ app/src/main/java/net/hunau/readmysqlvalue/MainActivity.java	(date 1557064448165)
+@@ -55,7 +55,7 @@
+                             TextView tv_result = findViewById(R.id.display);
+                             List<User> mp = dl.getUserInfoByName(name);
+                             Message msg = new Message();
+-                            if (mp == null) {
++                            if (mp==null) {
+                                 msg.what = 0;
+                                 msg.obj = "查询结果，空空如也";
+                                 //非UI线程不要试着去操作界面

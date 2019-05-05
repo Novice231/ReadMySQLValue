@@ -46,7 +46,8 @@ public class DBAdapter {
                 return null;
             } else {
                 List<User> users = new ArrayList<>();
-                while (res.next()){
+                if(res.next()==false)return null;
+                do{
                     User user = new User();
                     user.setSexy(res.getString("sexy"));
                     user.setName(res.getString("name"));
@@ -54,7 +55,7 @@ public class DBAdapter {
                     user.setPwd(res.getString("pwd"));
                     user.setIsused(res.getString("isused"));
                     users.add(user);
-                }
+                }while (res.next());
                 res.close();
                 st.close();
                 conn.close();

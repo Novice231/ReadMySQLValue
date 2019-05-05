@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                             TextView tv_result = findViewById(R.id.display);
                             List<User> mp = dl.getUserInfoByName(name);
                             Message msg = new Message();
-                            if (mp == null) {
+                            if (mp==null) {
                                 msg.what = 0;
                                 msg.obj = "查询结果，空空如也";
                                 //非UI线程不要试着去操作界面
