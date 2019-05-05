@@ -10,7 +10,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class DBAdapter {
     private final String TAG = "DBAdapter";
@@ -33,7 +35,7 @@ public class DBAdapter {
         return conn;
     }
 
-    public User[] getUserInfoByName(String name) {
+    public List<User> getUserInfoByName(String name) {
         HashMap<String, String> map = new HashMap<>();
         Connection conn = getConnection("test");
         try {
@@ -43,27 +45,19 @@ public class DBAdapter {
             if (res == null) {
                 return null;
             } else {
-                int cnt = res.getMetaData().getColumnCount();
-                User users[] = new User[2];
-                for(int ii = 0; ii < 2; ii++) {
-                    if(!res.next())
-                        break;
-                    for (int i = 1; i <= cnt; i++) {
-                        String field = res.getMetaData().getColumnName(i);
-                        map.put(field, res.getString(field));
-                    }
+                List<User> users = new ArrayList<>();
+                while (res.next()){
                     User user = new User();
                     user.setSexy(res.getString("sexy"));
                     user.setName(res.getString("name"));
                     user.setId(res.getString("id"));
                     user.setPwd(res.getString("pwd"));
                     user.setIsused(res.getString("isused"));
-                    users[ii] = user;
+                    users.add(user);
                 }
                 res.close();
                 st.close();
                 conn.close();
-                //return map;
                 return users;
             }
         } catch (Exception e) {
